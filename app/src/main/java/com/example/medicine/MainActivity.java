@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
     EditText edtFind;
     ArrayList<Medicine> arrMedicines;
     MedicineAdapter adapter;
-//    String selectAll = "SELECT * FROM Medicine ORDER BY TenM ASC";
-    String selectAll = "SELECT * FROM Medicine";
+    String selectAll = "SELECT * FROM Medicine ORDER BY TenM ASC";
+//    String selectAll = "SELECT * FROM Medicine";
 
     MainActivity c = MainActivity.this;
     @Override
@@ -47,19 +47,15 @@ public class MainActivity extends AppCompatActivity {
         database.QueryData("CREATE TABLE IF NOT EXISTS Medicine(Id INTEGER PRIMARY KEY AUTOINCREMENT, TenM VARCHAR(200))");
 
         arrMedicines = new ArrayList<>();
-        getDataMedicine(selectAll);
         adapter = new MedicineAdapter(c, R.layout.item_medicine, arrMedicines);
-        Log.v("onCreate", arrMedicines.get(arrMedicines.size()-1).getNameMedicine());
+//        Log.v("onCreate", arrMedicines.get(arrMedicines.size()-1).getNameMedicine());
         lvMedicine.setAdapter(adapter);
-
-//        database = new Database(c, "Medicine.SQLite", null, 1);
-//        database.QueryData("CREATE TABLE IF NOT EXISTS Medicine(Id INTEGER PRIMARY KEY AUTOINCREMENT, TenM VARCHAR(200))");
 
 //        database.QueryData("INSERT INTO Medicine VALUES(null, 'ytt')");
 //        database.QueryData("INSERT INTO Medicine VALUES(null, 'unnng')");
 
 
-//        getDataMedicine(selectAll);
+        getDataMedicine(selectAll);
 
         edtFind.addTextChangedListener(new TextWatcher() {
             @Override
@@ -73,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
                 if (strFind.equals(""))
                 {
                     getDataMedicine(selectAll);
-                    //Toast.makeText(c, "Bạn chưa nhập tên thuốc!", Toast.LENGTH_SHORT).show();
                 }else {
                     String sqlFind = "SELECT * FROM Medicine WHERE TenM LIKE '%"+strFind+"%'";
                     c.getDataMedicine(sqlFind);
@@ -99,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             int id = dataMedicine.getInt(0);
             arrMedicines.add(new Medicine(id, name));
         }
-        //adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
