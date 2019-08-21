@@ -2,7 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/menuAdd"
-        android:icon="@drawable/add2"
         app:showAsAction="always"
         android:title="Thêm"/>
+    <item android:id="@+id/menuReset"
+        android:title="Khôi phục dữ liệu gốc"
+        />
 </menu>

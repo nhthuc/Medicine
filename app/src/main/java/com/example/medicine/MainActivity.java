@@ -49,7 +49,11 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MedicineAdapter(c, R.layout.item_medicine, arrMedicines);
         lvMedicine.setAdapter(adapter);
 
-        InsertData();
+        Cursor dataMedicine_1 = database.GetData(selectAll);
+        if (dataMedicine_1.getCount() == 0){
+            InsertData();
+        }
+
         getDataMedicine(selectAll);
         edtFind.addTextChangedListener(new TextWatcher() {
             @Override
@@ -92,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(add_medicine, menu);
+
         return super.onCreateOptionsMenu(menu);
     }
     @Override
@@ -99,7 +104,30 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.menuAdd){
             dialogAdd();
         }
+        if (item.getItemId() == R.id.menuReset){
+            resetData();
+        }
         return super.onOptionsItemSelected(item);
+    }
+    private void resetData(){
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(c);
+        dialog.setMessage("Bạn có muốn khôi phục dữ liệu gốc không?");
+        dialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                database.QueryData("DELETE FROM Medicine");
+                Toast.makeText(c, "Đã khôi phục thành công!", Toast.LENGTH_SHORT).show();
+                InsertData();
+                getDataMedicine(selectAll);
+            }
+        });
+        dialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        dialog.show();
     }
 
     private void dialogAdd(){
@@ -195,5 +223,4 @@ public class MainActivity extends AppCompatActivity {
         database.QueryData("INSERT INTO Medicine VALUES(null, 'BESALICYD')");
         database.QueryData("INSERT INTO Medicine VALUES(null, 'MATERAZZI')");
     }
-
 }
