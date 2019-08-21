@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Medicine> arrMedicines;
     MedicineAdapter adapter;
     String selectAll = "SELECT * FROM Medicine ORDER BY TenM ASC";
-//    String selectAll = "SELECT * FROM Medicine";
 
     MainActivity c = MainActivity.this;
     @Override
@@ -48,15 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
         arrMedicines = new ArrayList<>();
         adapter = new MedicineAdapter(c, R.layout.item_medicine, arrMedicines);
-//        Log.v("onCreate", arrMedicines.get(arrMedicines.size()-1).getNameMedicine());
         lvMedicine.setAdapter(adapter);
 
-//        database.QueryData("INSERT INTO Medicine VALUES(null, 'ytt')");
-//        database.QueryData("INSERT INTO Medicine VALUES(null, 'unnng')");
-
-
+        InsertData();
         getDataMedicine(selectAll);
-
         edtFind.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -77,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
 
@@ -85,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //String selectAll = "SELECT * FROM Medicine";
     public void getDataMedicine(String sql){
         Cursor dataMedicine = database.GetData(sql);
         arrMedicines.clear();
@@ -171,12 +163,12 @@ public class MainActivity extends AppCompatActivity {
     }
     public void dialogDelete(final String name, final int id){
         final AlertDialog.Builder dialog = new AlertDialog.Builder(c);
-        dialog.setMessage("Bạn có muốn xóa "+ name+" này không?");
+        dialog.setMessage("Bạn có muốn xóa ( "+ name+" ) này không?");
         dialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 database.QueryData("DELETE FROM Medicine WHERE Id = '"+ id +"'");
-                Toast.makeText(c, "Đã xóa xong! " + name, Toast.LENGTH_SHORT).show();
+                Toast.makeText(c, "Đã xóa xong! (" + name + ")", Toast.LENGTH_SHORT).show();
                 getDataMedicine(selectAll);
             }
         });
@@ -187,6 +179,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    public void InsertData(){
+        database.QueryData("INSERT INTO Medicine VALUES(null, 'Ranitidin 300mg')");
+        database.QueryData("INSERT INTO Medicine VALUES(null, 'Zinmax-Domesco 500mg')");
+        database.QueryData("INSERT INTO Medicine VALUES(null, 'Humalog Mix 75/25 Kwikpen')");
+        database.QueryData("INSERT INTO Medicine VALUES(null, 'Viên nang Kupitral')");
+        database.QueryData("INSERT INTO Medicine VALUES(null, 'Vorifend Forte')");
+        database.QueryData("INSERT INTO Medicine VALUES(null, 'MASAK')");
+        database.QueryData("INSERT INTO Medicine VALUES(null, 'AGIRENYL')");
+        database.QueryData("INSERT INTO Medicine VALUES(null, 'Vitamin E 400 IU')");
+        database.QueryData("INSERT INTO Medicine VALUES(null, 'Mezapizin 10')");
+        database.QueryData("INSERT INTO Medicine VALUES(null, 'VASLOR 10')");
+        database.QueryData("INSERT INTO Medicine VALUES(null, 'BESALICYD')");
+        database.QueryData("INSERT INTO Medicine VALUES(null, 'MATERAZZI')");
     }
 
 }
