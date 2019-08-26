@@ -1,6 +1,7 @@
 package com.example.medicine;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,8 @@ public class MedicineAdapter extends BaseAdapter {
     private class ViewHolder{
         TextView txtMedicine;
         ImageView imgEdit;
+        TextView txtStatus;
+        TextView txtFullName;
     }
 
     @Override
@@ -51,6 +54,8 @@ public class MedicineAdapter extends BaseAdapter {
             view = inflater.inflate(layout, null);
             viewHolder.txtMedicine = view.findViewById(R.id.txtItemMedicine);
             viewHolder.imgEdit = view.findViewById(R.id.imageEdit);
+            viewHolder.txtStatus = view.findViewById(R.id.txtStatus);
+            viewHolder.txtFullName = view.findViewById(R.id.txtFullName);
             view.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) view.getTag();
@@ -59,11 +64,21 @@ public class MedicineAdapter extends BaseAdapter {
         final Medicine medicine = medicineList.get(i);
 
         viewHolder.txtMedicine.setText(medicine.getNameMedicine());
+        viewHolder.txtFullName.setText(medicine.getNameMedicine());
+
+        if (medicine.getStatus() == 0){
+            viewHolder.txtStatus.setText("DV");
+            viewHolder.txtStatus.setTextColor(Color.RED);
+        } else {
+            viewHolder.txtStatus.setText("BH");
+            viewHolder.txtStatus.setTextColor(Color.BLUE);
+        }
+
 
         viewHolder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.dialogUpdate(medicine.getNameMedicine(), medicine.getId());
+                context.dialogUpdate(medicine.getNameMedicine(), medicine.getId(), medicine.getStatus());
             }
         });
 

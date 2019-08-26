@@ -20,6 +20,31 @@
         android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:id="@+id/radioUpdateGroup"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioUpdateService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Dịch Vụ"
+            android:textSize="20dp"
+            android:textStyle="italic" />
+
+        <RadioButton
+            android:id="@+id/radioUpdateBHYT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            android:textStyle="italic"
+            android:text="BHYT" />
+    </RadioGroup>
     <LinearLayout
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
