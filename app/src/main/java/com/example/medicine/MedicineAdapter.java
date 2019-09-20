@@ -89,7 +89,6 @@ public class MedicineAdapter extends BaseAdapter {
                 return false;
             }
         });
-
         return view;
     }
 }

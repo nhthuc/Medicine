@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                database.QueryData("DELETE FROM Medicine WHERE Id = '"+ id +"'");
+                database.QueryData("DELETE FROM Medicine_v1 WHERE Id = '"+ id +"'");
                 Toast.makeText(c, "Đã xóa xong! (" + name + ")", Toast.LENGTH_SHORT).show();
                 getDataMedicine(selectAll);
             }
